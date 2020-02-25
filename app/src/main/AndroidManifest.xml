@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.putrasamawa.dicodingmade1">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".DetailActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name=".provider.MovieProvider"
+            android:authorities="com.putrasamawa.dicodingmade1"
+            android:exported="true"
+            android:readPermission="com.putrasamawa.dicodingmade1.READ_DATABASE"
+            android:writePermission="com.putrasamawa.dicodingmade1.WRITE_DATABASE" />
+        <provider
+            android:name=".provider.TVProvider"
+            android:authorities="com.putrasamawa.dicodingmade1"
+            android:exported="true"
+            android:readPermission="com.putrasamawa.dicodingmade1.READ_DATABASE"
+            android:writePermission="com.putrasamawa.dicodingmade1.WRITE_DATABASE" />
+        <receiver
+            android:name=".notification.DailyReceiver"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver
+            android:name=".notification.MovieReleaseReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver android:name=".widgets.MovieWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/movie_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widgets.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+    </application>
+    <permission
+        android:name="com.putrasamawa.dicodingmade1.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
+    <permission
+        android:name="com.putrasamawa.dicodingmade1.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+</manifest>
